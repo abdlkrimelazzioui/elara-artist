@@ -1,0 +1,181 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --bg-primary: #0a0a0a;
+    --bg-secondary: #121212;
+    --bg-elevated: #181818;
+    --bg-paper: #f4f2ed;
+    --fg-primary: #f4f2ed;
+    --fg-secondary: #a3a3a3;
+    --fg-muted: #666666;
+    --border-subtle: rgba(244, 242, 237, 0.12);
+    --border-strong: rgba(244, 242, 237, 0.28);
+    --accent: #c9a86a;
+    --accent-glow: rgba(201, 168, 106, 0.15);
+  }
+
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    background-color: #0a0a0a;
+    color: #f4f2ed;
+    font-family: var(--font-geist-sans), -apple-system, BlinkMacSystemFont, "Helvetica Neue", "Neue Haas Grotesk", sans-serif;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    selection-background-color: #f4f2ed;
+    selection-color: #0a0a0a;
+  }
+
+  ::selection {
+    background-color: #f4f2ed;
+    color: #0a0a0a;
+  }
+
+  body {
+    background-color: #0a0a0a;
+    color: #f4f2ed;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+}
+
+/* Editorial Typography */
+.font-display {
+  font-family: var(--font-geist-sans), -apple-system, BlinkMacSystemFont, "Helvetica Neue", sans-serif;
+  letter-spacing: -0.04em;
+  line-height: 0.88;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.font-editorial {
+  font-family: var(--font-geist-sans), -apple-system, BlinkMacSystemFont, "Helvetica Neue", sans-serif;
+  letter-spacing: -0.025em;
+  line-height: 1.05;
+}
+
+.font-mono-meta {
+  font-family: var(--font-geist-mono), ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-size: 0.75rem;
+}
+
+/* Asymmetrical Grid System */
+.editorial-container {
+  max-width: 1440px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: clamp(1.25rem, 4vw, 4rem);
+  padding-right: clamp(1.25rem, 4vw, 4rem);
+}
+
+.editorial-grid-12 {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: clamp(1rem, 2vw, 2rem);
+}
+
+/* Image treatments */
+.editorial-img-container {
+  overflow: hidden;
+  position: relative;
+  background-color: #141414;
+}
+
+.editorial-img {
+  transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1), filter 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: grayscale(100%) contrast(105%);
+}
+
+.editorial-img-container:hover .editorial-img {
+  transform: scale(1.04);
+  filter: grayscale(0%) contrast(100%);
+}
+
+/* Subtle magnetic / link underlines */
+.hover-underline {
+  position: relative;
+  display: inline-block;
+}
+
+.hover-underline::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  transform: scaleX(0);
+  height: 1px;
+  bottom: -2px;
+  left: 0;
+  background-color: currentColor;
+  transform-origin: bottom right;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.hover-underline:hover::after {
+  transform: scaleX(1);
+  transform-origin: bottom left;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0a0a0a;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #2a2a2a;
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #444444;
+}
+
+/* Custom Cursor styles */
+@media (pointer: fine) {
+  body {
+    cursor: none;
+  }
+  a, button, [role="button"], input, textarea, select {
+    cursor: none;
+  }
+}
+
+/* Smooth keyframes */
+@keyframes pulseSubtle {
+  0%, 100% { opacity: 0.3; transform: scale(1); }
+  50% { opacity: 0.8; transform: scale(1.05); }
+}
+
+.animate-pulse-subtle {
+  animation: pulseSubtle 4s ease-in-out infinite;
+}
+
+@keyframes marquee {
+  0% { transform: translateX(0%); }
+  100% { transform: translateX(-50%); }
+}
+
+.animate-marquee {
+  display: flex;
+  width: 200%;
+  animation: marquee 25s linear infinite;
+}
+
+.animate-marquee:hover {
+  animation-play-state: paused;
+}
